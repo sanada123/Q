@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Raffle</title>
+    <style>
+        body {
+            margin: 0;
+            background: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #raffle {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 10%;
+            width: 80%;
+            height: 60%;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid black;
+            border-radius: 10px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="raffle">
+        <h1>🎉 ההגרלה בעיצומה 🎉</h1>
+        <p id="winner">מספר זוכה: 7</p>
+    </div>
+    <script>
+        function showRaffle(winner) {
+            document.getElementById('raffle').style.display = 'block';
+            document.getElementById('winner').innerText = `מספר זוכה: ${winner}`;
+            setTimeout(() => {
+                document.getElementById('raffle').style.display = 'none';
+            }, 5000);
+        }
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'startRaffle') {
+                showRaffle(event.data.payload.winner);
+            }
+        });
+    </script>
+</body>
+</html>
